@@ -2,12 +2,15 @@ import requests
 import json
 import pprint
 import webbrowser
+import datetime
+
+searchDate = datetime.date.today() - datetime.timedelta(days=7)
 
 params = {
     "site" : "stackoverflow",
     "sort" : "votes",
     "order" : "desc",
-    "fromdate" : "2021-04-01",
+    "fromdate" : searchDate,
     "tagged" : "python",
     "min" : 6
 }
@@ -20,4 +23,4 @@ except json.decoder.JSONDecodeError:
     print("Error")
 else:
     for question in questions["items"]:
-        pprint.pprint(question["link"])
+        webbrowser.open_new_tab(question["link"])
